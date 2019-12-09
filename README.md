@@ -1,1 +1,1 @@
-# dmm-api-py
+# DMM API Client for Python
