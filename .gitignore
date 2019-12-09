@@ -1,7 +1,6 @@
 __pycache__/
 
 # Environments
-.env
 .venv
 
 # mypy
