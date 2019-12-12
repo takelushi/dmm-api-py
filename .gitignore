@@ -5,3 +5,7 @@ __pycache__/
 
 # mypy
 .mypy_cache/
+
+# pip package
+**/*.egg-info/
+dist/
