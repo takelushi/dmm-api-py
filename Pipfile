@@ -16,6 +16,8 @@ flake8-trailing-commas = "*"
 pep8-naming = "*"
 yapf = "*"
 mypy = "*"
+wheel = "*"
+twine = "*"
 
 [packages]
 requests = "*"
