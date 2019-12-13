@@ -17,6 +17,7 @@ class DMMApiClient:
         api_id (str): API ID.
         affiliate_id (str): Affiliate ID.
         api_version: (str): API version (default is 'v3').
+        default_req_args (dict): Request arguments. Defaults to {}.
     """
 
     api_id: str
