@@ -27,14 +27,15 @@ print(res.json())
 
 ## Supported API list
 
-* v3
-   * 商品情報 API (ItemList)
-   * フロア API (FloorList)
-   * 女優検索 API (ActressSearch)
-   * ジャンル検索 API (GenreSearch)
-   * メーカー検索 API (MakerSearch)
-   * シリーズ検索 API (SeriesSearch)
-   * 作者検索 API (AuthorSearch)
+v3
+
+* 商品情報 API (ItemList)
+* フロア API (FloorList)
+* 女優検索 API (ActressSearch)
+* ジャンル検索 API (GenreSearch)
+* メーカー検索 API (MakerSearch)
+* シリーズ検索 API (SeriesSearch)
+* 作者検索 API (AuthorSearch)
 
 ## For developers
 
