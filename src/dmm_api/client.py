@@ -22,17 +22,24 @@ class DMMApiClient:
     api_id: str
     affiliate_id: str
     api_version: str
+    default_req_args: dict
 
-    def __init__(self, api_id: str, affiliate_id: str) -> None:
+    def __init__(self,
+                 api_id: str,
+                 affiliate_id: str,
+                 default_req_args: dict = None) -> None:
         """Init.
 
         Args:
             api_id (str): API ID.
             affiliate_id (str): Affiliate ID.
+            default_req_args (dict, optional): Request arguments.
+                                               Defaults to {}.
         """
         self.api_id = api_id
         self.affiliate_id = affiliate_id
         self.api_version = 'v3'
+        self.default_req_args = default_req_args if default_req_args else {}
 
     def _get_common_params(self) -> dict:
         """Get common parameters for request.
@@ -68,10 +75,11 @@ class DMMApiClient:
         Returns:
             requests.Response: HTTP response.
         """
+        req_args = self.default_req_args
         if not params:
             params = {}
         params.update(self._get_common_params())
-        return requests.get(self._get_url(path), params=params)
+        return requests.get(self._get_url(path), params=params, **req_args)
 
     def get_item_list(
             self,
