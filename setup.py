@@ -7,6 +7,7 @@ package = 'dmm_api'
 
 
 def get_requires_from_file(filename):
+    """Get require packages from file."""
     return open(filename, 'r', encoding='UTF-8').read().splitlines()
 
 
@@ -16,7 +17,6 @@ readme_path = 'README.md'
 with open(readme_path, 'r', encoding='UTF-8') as f:
     long_description = f.read()
 
-# Create arguments.
 setuptools.setup(
     name='dmm-api',
     version=version,
