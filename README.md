@@ -11,7 +11,7 @@ pip install dmm-api
 
 ## Usage
 
-* [Examples]([examples/](https://github.com/takelushi/dmm-api-py/tree/master/examples))
+* [Examples](https://github.com/takelushi/dmm-api-py/tree/master/examples)
 
 ```py
 import os
