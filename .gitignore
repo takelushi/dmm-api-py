@@ -1,11 +1,10 @@
+# Python
 __pycache__/
-
-# Environments
 .venv
-
-# mypy
 .mypy_cache/
 
-# pip package
-**/*.egg-info/
+# Build folder
 dist/
+
+# Editor
+.vscode/
