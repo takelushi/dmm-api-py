@@ -11,23 +11,24 @@ pip install dmm-api
 
 ## Usage
 
+* [Examples](examples/)
+
 ```py
 import os
 
 from dmm_api import DMMApiClient
 
-API_ID = os.environ.get('DMM_API_ID')
-AFFILIATE_ID = os.environ.get('DMM_AFFILIATE_ID')
+API_ID = os.environ.get('DMM_API_ID', '')
+AFFILIATE_ID = os.environ.get('DMM_AFFILIATE_ID', '')
 
 client = DMMApiClient(API_ID, AFFILIATE_ID)
 res = client.get_floor()
 print(res.json())
-
 ```
 
 ## Supported API list
 
-v3
+### v3
 
 * 商品情報 API (ItemList)
 * フロア API (FloorList)
@@ -41,24 +42,18 @@ v3
 
 * Setup
 
-   **Require: pipenv**
+   **Require: poetry**
 
    ```she
    git clone git@github.com:takelushi/dmm-api-py.git
    cd dmm-api-py
-   pipenv install --dev
+   poetry install
    ```
 
 * Build
 
    ```sh
-   python setup.py sdist bdist_wheel
-   ```
-
-* Install for development.
-
-   ```sh
-   pip install -e .
+   poetry build
    ```
 
 * Register PyPI and install.
