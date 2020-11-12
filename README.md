@@ -11,7 +11,7 @@ pip install dmm-api
 
 ## Usage
 
-* [Examples](examples/)
+* [Examples]([examples/](https://github.com/takelushi/dmm-api-py/tree/master/examples))
 
 ```py
 import os
@@ -59,11 +59,6 @@ print(res.json())
 * Register PyPI and install.
 
    ```sh
-   # test
-   twine upload --repository pypitest dist/*
-   pip --no-cache-dir install --upgrade --index-url https://test.pypi.org/simple/ dmm-api
-
-   # production
-   twine upload --repository pypi dist/*
+   poetry publish
    pip --no-cache-dir install --upgrade dmm-api
    ```

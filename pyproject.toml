@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dmm-api"
-version = "0.1.0"
+version = "0.1.1"
 description = "DMM API Client for Python"
 authors = ["Takeru Saito <takelushi@gmail.com>"]
 maintainers = ["Takeru Saito <takelushi@gmail.com>"]
@@ -22,7 +22,6 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.6"
 requests = "^2.25.0"
-tqdm = "^4.51.0"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.8.4"

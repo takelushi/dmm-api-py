@@ -34,7 +34,7 @@ class Crawler:
             offset (int, optional): Offset. Defaults to 1.
             limit (int, optional): Count limit. Defaults to None.
         """
-        self.api_func = api_func
+        self.api_func = api_func  # type: ignore
         self.keys = keys
         self.params = params
         self.hits = hits
@@ -79,24 +79,3 @@ class Crawler:
 
         self.records = get_dict_value(d, self.keys)
         self.records_idx = 0
-
-
-# from tqdm import tqdm
-# from dmm_api.response_parser import AbstractResponseParser
-# def export_tsv(tsv_path: str, crawler: Crawler,
-#                parser: AbstractResponseParser) -> None:
-#     """Export TSV file.
-#
-#     Args:
-#         tsv_path (str): TSV file path.
-#         crawler (Crawler): Crawler object.
-#         parser (AbstractResponseParser): Parser object.
-#     """
-#     headers = parser.get_headers()
-#     with open(tsv_path, 'w', encoding='UTF-8', newline='\n') as tsv, \
-#             tqdm(total=crawler.limit) as progress_bar:
-#         tsv.write('\t'.join(headers) + '\n')
-#         for record in crawler:
-#             record_list = parser.parse_to_list(record)
-#             tsv.write('\t'.join(record_list) + '\n')
-#             progress_bar.update(1)

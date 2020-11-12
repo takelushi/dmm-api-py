@@ -2,6 +2,7 @@
 __pycache__/
 .venv
 .mypy_cache/
+*.egg-info/
 
 # Build folder
 dist/
