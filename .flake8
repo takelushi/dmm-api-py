@@ -12,3 +12,6 @@ format = ${cyan}%(path)s${reset}:${yellow_bold}%(row)d${reset}:${green_bold}%(co
 # flake8-import-order
 application-import-names = dmm_api
 import-order-style = google
+
+# flake8-coding
+no-accept-encodings = True

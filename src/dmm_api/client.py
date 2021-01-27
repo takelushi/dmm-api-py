@@ -17,22 +17,30 @@ class DMMApiClient:
         api_id (str): API ID.
         affiliate_id (str): Affiliate ID.
         api_version: (str): API version (default is 'v3').
+        default_req_args (dict): Request arguments. Defaults to {}.
     """
 
     api_id: str
     affiliate_id: str
     api_version: str
+    default_req_args: dict
 
-    def __init__(self, api_id: str, affiliate_id: str) -> None:
+    def __init__(self,
+                 api_id: str,
+                 affiliate_id: str,
+                 default_req_args: dict = None) -> None:
         """Init.
 
         Args:
             api_id (str): API ID.
             affiliate_id (str): Affiliate ID.
+            default_req_args (dict, optional): Request arguments.
+                                               Defaults to {}.
         """
         self.api_id = api_id
         self.affiliate_id = affiliate_id
         self.api_version = 'v3'
+        self.default_req_args = default_req_args if default_req_args else {}
 
     def _get_common_params(self) -> dict:
         """Get common parameters for request.
@@ -58,7 +66,8 @@ class DMMApiClient:
 
     def _request_get(self,
                      path: str,
-                     params: Dict[str, Any] = None) -> requests.Response:
+                     params: Dict[str, Any] = None,
+                     req_args: Dict[str, Any] = None) -> requests.Response:
         """Request with GET method.
 
         Args:
@@ -68,28 +77,33 @@ class DMMApiClient:
         Returns:
             requests.Response: HTTP response.
         """
-        if not params:
-            params = {}
-        params.update(self._get_common_params())
-        return requests.get(self._get_url(path), params=params)
+        args = self.default_req_args
+        req_params = self._get_common_params()
 
-    def get_item_list(
-            self,
-            site: str,
-            service: str = None,
-            floor: str = None,
-            hits: int = 20,
-            offset: int = 1,
-            sort: str = None,
-            keyword: str = None,
-            cid: str = None,
-            article: str = None,
-            article_id: str = None,
-            gte_date: str = None,
-            lte_date: str = None,
-            mono_stock: str = None,
-            output: str = 'json',
-    ) -> requests.Response:
+        if req_args:
+            args.update(req_args)
+
+        if params:
+            req_params.update(params)
+
+        return requests.get(self._get_url(path), params=req_params, **args)
+
+    def get_item_list(self,
+                      site: str,
+                      service: str = None,
+                      floor: str = None,
+                      hits: int = 20,
+                      offset: int = 1,
+                      sort: str = None,
+                      keyword: str = None,
+                      cid: str = None,
+                      article: str = None,
+                      article_id: str = None,
+                      gte_date: str = None,
+                      lte_date: str = None,
+                      mono_stock: str = None,
+                      output: str = 'json',
+                      req_args: Dict[str, Any] = None) -> requests.Response:
         """Search actress API."""
         params = {
             'site': site,
@@ -108,33 +122,34 @@ class DMMApiClient:
             'output': output,
         }
 
-        return self._request_get('ItemList', params=params)
+        return self._request_get('ItemList', params=params, req_args=req_args)
 
-    def get_floor(self, output: str = 'json') -> requests.Response:
+    def get_floor(self,
+                  output: str = 'json',
+                  req_args: Dict[str, Any] = None) -> requests.Response:
         """Get floor list API."""
         params = {'output': output}
-        return self._request_get('FloorList', params=params)
+        return self._request_get('FloorList', params=params, req_args=req_args)
 
-    def search_actress(
-            self,
-            initial: str = None,
-            actress_id: str = None,
-            keyword: str = None,
-            gte_bust: int = None,
-            lte_bust: int = None,
-            gte_waist: int = None,
-            lte_waist: int = None,
-            gte_hip: int = None,
-            lte_hip: int = None,
-            gte_height: int = None,
-            lte_height: int = None,
-            gte_birthday: str = None,
-            lte_birthday: str = None,
-            hits: int = 20,
-            offset: int = 1,
-            sort: str = None,
-            output: str = 'json',
-    ) -> requests.Response:
+    def search_actress(self,
+                       initial: str = None,
+                       actress_id: str = None,
+                       keyword: str = None,
+                       gte_bust: int = None,
+                       lte_bust: int = None,
+                       gte_waist: int = None,
+                       lte_waist: int = None,
+                       gte_hip: int = None,
+                       lte_hip: int = None,
+                       gte_height: int = None,
+                       lte_height: int = None,
+                       gte_birthday: str = None,
+                       lte_birthday: str = None,
+                       hits: int = 20,
+                       offset: int = 1,
+                       sort: str = None,
+                       output: str = 'json',
+                       req_args: Dict[str, Any] = None) -> requests.Response:
         """Search actress API."""
         params = {
             'initial': initial,
@@ -156,7 +171,9 @@ class DMMApiClient:
             'output': output,
         }
 
-        return self._request_get('ActressSearch', params=params)
+        return self._request_get('ActressSearch',
+                                 params=params,
+                                 req_args=req_args)
 
     def search_genre(self,
                      floor_id: str,
@@ -164,7 +181,8 @@ class DMMApiClient:
                      hits: int = 20,
                      offset: int = 1,
                      output: str = 'json',
-                     genre_id: str = None) -> requests.Response:
+                     genre_id: str = None,
+                     req_args: Dict[str, Any] = None) -> requests.Response:
         """Search genre API."""
         params = {
             'floor_id': floor_id,
@@ -175,16 +193,17 @@ class DMMApiClient:
             'genre_id': genre_id,
         }
 
-        return self._request_get('GenreSearch', params=params)
+        return self._request_get('GenreSearch',
+                                 params=params,
+                                 req_args=req_args)
 
-    def search_maker(
-            self,
-            floor_id: str,
-            initial: str = None,
-            hits: int = 20,
-            offset: int = 1,
-            output: str = 'json',
-    ) -> requests.Response:
+    def search_maker(self,
+                     floor_id: str,
+                     initial: str = None,
+                     hits: int = 20,
+                     offset: int = 1,
+                     output: str = 'json',
+                     req_args: Dict[str, Any] = None) -> requests.Response:
         """Search maker API."""
         params = {
             'floor_id': floor_id,
@@ -193,16 +212,17 @@ class DMMApiClient:
             'offset': offset,
             'output': output,
         }
-        return self._request_get('MakerSearch', params=params)
+        return self._request_get('MakerSearch',
+                                 params=params,
+                                 req_args=req_args)
 
-    def search_series(
-            self,
-            floor_id: str,
-            initial: str = None,
-            hits: int = 20,
-            offset: int = 1,
-            output: str = 'json',
-    ) -> requests.Response:
+    def search_series(self,
+                      floor_id: str,
+                      initial: str = None,
+                      hits: int = 20,
+                      offset: int = 1,
+                      output: str = 'json',
+                      req_args: Dict[str, Any] = None) -> requests.Response:
         """Search series API."""
         params = {
             'floor_id': floor_id,
@@ -212,16 +232,17 @@ class DMMApiClient:
             'output': output,
         }
 
-        return self._request_get('SeriesSearch', params=params)
+        return self._request_get('SeriesSearch',
+                                 params=params,
+                                 req_args=req_args)
 
-    def search_author(
-            self,
-            floor_id: str,
-            initial: str = None,
-            hits: int = 20,
-            offset: int = 1,
-            output: str = 'json',
-    ) -> requests.Response:
+    def search_author(self,
+                      floor_id: str,
+                      initial: str = None,
+                      hits: int = 20,
+                      offset: int = 1,
+                      output: str = 'json',
+                      req_args: Dict[str, Any] = None) -> requests.Response:
         """Search author API."""
         params = {
             'floor_id': floor_id,
@@ -231,4 +252,6 @@ class DMMApiClient:
             'output': output,
         }
 
-        return self._request_get('AuthorSearch', params=params)
+        return self._request_get('AuthorSearch',
+                                 params=params,
+                                 req_args=req_args)
