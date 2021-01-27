@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dmm-api"
-version = "0.1.2"
+version = "0.1.3"
 description = "DMM API Client for Python"
 authors = ["Takeru Saito <takelushi@gmail.com>"]
 maintainers = ["Takeru Saito <takelushi@gmail.com>"]
@@ -40,10 +40,17 @@ flake8-eradicate = "^1.0.0"
 flake8-pytest-style = "^1.3.0"
 pep8-naming = "^0.11.1"
 mypy = "^0.790"
+isort = "^5.7.0"
 
 [build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.urls]
 issues = "https://github.com/takelushi/dmm-api-py/issues"
+
+[tool.isort]
+profile = "google"
+line_length = "79"
+force_single_line = false
+known_first_party = ["dmm_api"]
