@@ -1,5 +1,5 @@
 [flake8]
-ignore = H601
+ignore = H601,E501
 exclude = __init__.py
 
 # flake8-quotes
