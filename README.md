@@ -44,10 +44,19 @@ print(res.json())
 
    **Require: poetry**
 
-   ```she
+   ```sh
    git clone git@github.com:takelushi/dmm-api-py.git
    cd dmm-api-py
    poetry install
+   ```
+
+* Lint and Test
+
+   ```sh
+   flake8 src/ tests/
+   export API_ID='...'
+   export AFFILIATE_ID='...'
+   pytestz
    ```
 
 * Build
