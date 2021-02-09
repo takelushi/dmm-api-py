@@ -1,13 +1,10 @@
 [flake8]
-ignore = D205,D413
+ignore = H601,E501
 exclude = __init__.py
 
 # flake8-quotes
 inline-quotes = single
 multiline-quotes = double
-
-# flake8-colors
-format = ${cyan}%(path)s${reset}:${yellow_bold}%(row)d${reset}:${green_bold}%(col)d${reset}: ${red_bold}%(code)s${reset} %(text)s
 
 # flake8-import-order
 application-import-names = dmm_api

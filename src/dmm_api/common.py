@@ -15,6 +15,31 @@ def to_str(val: Any) -> str:
     return '' if val is None else val if isinstance(val, str) else str(val)
 
 
+def _convert_value(pattern: dict, value: Any) -> str:
+    """Convert value.
+
+    Args:
+        pattern (dict): Pattern.
+        value (Any): Value.
+
+    Raises:
+        ValueError: Unknown pattern name.
+
+    Returns:
+        str: Converted value.
+    """
+    if pattern['name'] == 'str':
+        return to_str(value)
+    elif pattern['name'] == 'dict_list':
+        if value is None:
+            v_l: List[str] = []
+        else:
+            v_l = [to_str(get_dict_value(v, pattern['value'])) for v in value]
+        return '[' + ','.join(v_l) + ']'
+
+    raise ValueError('Unknown pattern name.')
+
+
 def dict_to_list(d: dict, rule: dict) -> List[str]:
     """Convert dict to list.
 
@@ -32,16 +57,8 @@ def dict_to_list(d: dict, rule: dict) -> List[str]:
         else:
             value = get_dict_value(d, keys)
 
-        if pattern['name'] == 'str':
-            result.append(to_str(value))
-        elif pattern['name'] == 'dict_list':
-            if value is None:
-                v_l: List[str] = []
-            else:
-                v_l = [
-                    to_str(get_dict_value(v, pattern['value'])) for v in value
-                ]
-            result.append('[' + ','.join(v_l) + ']')
+        result.append(_convert_value(pattern, value))
+
     return result
 
 
