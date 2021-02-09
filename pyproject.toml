@@ -58,6 +58,7 @@ pytest = "^6.2.2"
 pytest-cov = "^2.11.1"
 pytest-html = "^3.1.1"
 yapf = "^0.30.0"
+toml = "^0.10.2"
 
 
 [build-system]
@@ -72,3 +73,10 @@ profile = "google"
 line_length = "79"
 force_single_line = false
 known_first_party = ["dmm_api"]
+
+[tool.pytest.ini_options]
+minversion = "6.2"
+addopts = "--cov=src/ --cov-report term-missing"
+testpaths = [
+    "tests"
+]

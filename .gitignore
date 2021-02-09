@@ -3,6 +3,7 @@ __pycache__/
 .venv
 .mypy_cache/
 *.egg-info/
+.coverage
 
 # Build folder
 dist/
