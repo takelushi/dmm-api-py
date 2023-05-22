@@ -12,7 +12,7 @@ repository = "https://github.com/takelushi/dmm-api-py"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-requests = "2.23.0"
+requests = "2.31.0"
 
 [tool.poetry.dev-dependencies]
 cohesion = "^1.0.0"
